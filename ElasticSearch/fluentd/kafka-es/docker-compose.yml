@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  fluentd-kafka:
+    image: fluentd-with-kafka:latest
+    volumes:
+      - ./etc:/fluentd/etc
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "20m"
+    ports:
+      - "5140:5140"
+      - "24224:24224"
+    environment:
+      - FLUENTD_CONF=fluentd.conf

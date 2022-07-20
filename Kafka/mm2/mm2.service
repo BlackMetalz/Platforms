@@ -1,0 +1,17 @@
+
+# path: /etc/systemd/system/mm2.service
+[Unit]
+Description=Mirror Make 2 Service
+After=netowrk.target
+[Service]
+Type=simple
+Restart=always
+LimitNOFILE=65535
+RestartSec=1
+User=root
+Environment="KAFKA_HEAP_OPTS=-Xmx1G -Xms1G"
+Environment="KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/data/kafka/kafka_2.13-2.7.0/config/log4j.properties -Dkafka.logs.dir=/data/mm2/logs"
+Environment="KAFKA_OPTS=-javaagent:/data/kafka/kafka_2.13-2.7.0/bin/jmx_prometheus_javaagent-0.13.0.jar=3600:/data/kafka/kafka_2.13-2.7.0/config/kafka-connect.yml"
+ExecStart=/data/kafka/kafka_2.13-2.7.0/bin/connect-mirror-maker.sh /data/kafka/kafka_2.13-2.7.0/config/mm2.properties
+[Install]
+WantedBy=multi-user.target

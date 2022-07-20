@@ -1,0 +1,27 @@
+# 3 Node version
+# Have to chown data and logs folder to 1000:1000
+version: '2'
+
+services:
+    elasticsearch:
+        image: es:7.6.1
+        network_mode: host
+        container_name: es-4854
+        #restart: always
+        environment:
+          - "ES_JAVA_OPTS: -Xms1G -Xmx1G"
+          - node.name=es-4854
+          - network.host= 10.3.48.54
+          - cluster.name=es-docker-cluster
+          - cluster.initial_master_nodes=es-4854,es-4856,es-4882
+          - discovery.seed_hosts=es-4854,es-4856,es-4882
+          - bootstrap.memory_lock=true
+          - http.cors.enabled=true
+          - http.cors.allow-origin=*
+        ulimits:
+          memlock:
+            soft: -1
+            hard: -1
+        volumes:
+            - ./data:/usr/share/elasticsearch/data
+            - ./logs:/usr/share/elasticsearch/logs

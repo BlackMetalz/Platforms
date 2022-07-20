@@ -1,0 +1,4 @@
+{
+"data-root": "{{ data_root }}/docker", 
+"bip": "{{ bip }}"
+}

@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+
+  redmine:
+    image: redmine
+    restart: always
+    ports:
+      - 8080:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: yourpassword
+      REDMINE_DB_PORT: 3306
+    expose:
+      - '8080'
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: redmine
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - /root/docker-compose/redmine/mysql:/var/lib/mysql
