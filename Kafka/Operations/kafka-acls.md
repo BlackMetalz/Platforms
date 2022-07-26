@@ -2,7 +2,7 @@
 
 ## - Show list permission: 
 ```
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.54:2181 --list
+bin/kafka-acls.sh --authorizer-properties zookeeper.connect=zk_host:port --list
 ```
 
 Output:
@@ -30,7 +30,7 @@ User in host 10.3.48.54 / 10.3.48.56 / 10.3.48.82 has full permission
 
 ## Command grant all permission for specific host
 ```
-kafka-acls --authorizer-properties zookeeper.connect=10.3.48.54:2181,10.3.48.56:2181,10.3.48.82:2181 --operation All --allow-principal User:*   --allow-host 10.1.2.123  --cluster --topic '*' --group '*' --add
+kafka-acls --authorizer-properties zookeeper.connect=zk_host:port --operation All --allow-principal User:*   --allow-host 10.1.2.123  --cluster --topic '*' --group '*' --add
 
 ```
 
@@ -46,7 +46,7 @@ A Wildcard pattern with the same type, e.g. ResourcePattern(TOPIC, "*", LITERAL)
 A Prefixed pattern with the same type and where the name is a matching prefix, e.g. ResourcePattern(TOPIC, "payments.", PREFIXED)
 ```
 
-Other useful: https://cwiki.apache.org/confluence/display/KAFKA/KIP-290%3A+Support+for+Prefixed+ACLs
+## Other useful: https://cwiki.apache.org/confluence/display/KAFKA/KIP-290%3A+Support+for+Prefixed+ACLs
 ```
 Motivation
 Kafka authorizes access to resources like topics, consumer groups etc. by way of ACLs. The current supported semantic of resource name in ACL definition is either full resource name or special wildcard '*', which matches everything.
@@ -59,7 +59,7 @@ Principal “user1” has access to all consumer groups that start with “com.c
 Support for adding ACLs to such 'prefixed resource patterns' will greatly simplify ACL operational story in a multi-tenant environment.
 ```
 
-What happens when i grant full permission to one host. In this example it is 10.5.94.94
+## What happens when i grant full permission to one host. In this example it is 10.5.94.94
 ```
 Current ACLs for resource `ResourcePattern(resourceType=CLUSTER, name=kafka-cluster, patternType=LITERAL)`:
         (principal=User:*, host=10.5.94.94, operation=ALL, permissionType=ALLOW)
@@ -92,9 +92,9 @@ Current ACLs for resource `ResourcePattern(resourceType=TOPIC, name=test_, patte
 
 ```
 
-I want remove part host = bin. Command:
+## I want remove part host = bin. Command:
 ```
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.54:2181,10.3.48.56:2181,10.3.48.82:2181 --remove --allow-principal User:test1  --allow-host
+bin/kafka-acls.sh --authorizer-properties zookeeper.connect=zk_host:port --remove --allow-principal User:test1  --allow-host
  'bin'  --operation ALL --topic 'test_' --group 'test_' --resource-pattern-type prefixed
 ```
 
@@ -115,7 +115,7 @@ Current ACLs for resource `ResourcePattern(resourceType=GROUP, name=test_, patte
         (principal=User:test1, host=*, operation=ALL, permissionType=ALLOW)
 ```
 
-Another example with delete
+## Another example with delete
 ```
 Current ACLs for resource `ResourcePattern(resourceType=TOPIC, name=cluster_10_3_cluster_10_5_*, patternType=LITERAL)`:
         (principal=User:*, host=10.5.92.67, operation=READ, permissionType=ALLOW)
@@ -125,15 +125,15 @@ Current ACLs for resource `ResourcePattern(resourceType=TOPIC, name=cluster_10_3
         (principal=User:*, host=10.5.93.192, operation=READ, permissionType=ALLOW)
         (principal=User:*, host=10.3.48.82, operation=READ, permissionType=ALLOW)
 ```
-Use: `bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.5.92.67:2181 --remove --topic 'cluster_10_3_cluster_10_5_*'`
+Use: `bin/kafka-acls.sh --authorizer-properties zookeeper.connect=zk_host:port --remove --topic 'cluster_10_3_cluster_10_5_*'`
 
 
 Don't care for user and complete want to remove any permission related to that topic?
 ```
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.5.92.67:2181 --remove --topic 'CLUSTER-10-3_test*'
+bin/kafka-acls.sh --authorizer-properties zookeeper.connect=zk_host:port --remove --topic 'CLUSTER-10-3_test*'
 ```
 
-Remove wildcard permission like this:
+## Remove wildcard permission like this:
 
 ```
 Current ACLs for resource `ResourcePattern(resourceType=TOPIC, name=*, patternType=LITERAL)`: 
@@ -145,5 +145,19 @@ Current ACLs for resource `ResourcePattern(resourceType=GROUP, name=*, patternTy
 
 Command:
 ```
-kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.74:2181 -operation All --allow-principal User:*   --allow-host '*'  --cluster --topic '*' --group '*' --remove
+kafka-acls.sh --authorizer-properties zookeeper.connect=zk_host:port -operation All --allow-principal User:*   --allow-host '*'  --cluster --topic '*' --group '*' --remove
+```
+
+## Grant read ( consume ) to specific topic
+```
+bin/kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=zk_host:port --add --allow-principal User:your_username --operation Read --topic user-topic-name 
+```
+
+Output:
+```
+Adding ACLs for resource `ResourcePattern(resourceType=TOPIC, name=user-topic-name, patternType=LITERAL)`: 
+ 	(principal=User:your_username, host=*, operation=READ, permissionType=ALLOW) 
+
+Current ACLs for resource `ResourcePattern(resourceType=TOPIC, name=user-topic-name, patternType=LITERAL)`: 
+ 	(principal=User:your_username, host=*, operation=READ, permissionType=ALLOW) 
 ```
