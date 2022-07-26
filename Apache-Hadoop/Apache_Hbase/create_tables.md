@@ -1,4 +1,4 @@
-- Create table with Key range: 000 -> 999
+## Create table with Key range: 000 -> 999
 ```
 create 'hbase_tbl_dev', 'cf', {SPLITS => ['050','100','150','200','250','300','350','400','450','500','550','600','650','700','750','800','850','900','950']}
 alter 'hbase_tbl_dev', { NAME => 'cf', COMPRESSION => 'SNAPPY' }
@@ -22,8 +22,13 @@ Remove last one and we get
 {SPLITS => ['050','100','150','200','250','300','350','400','450','500','550','600','650','700','750','800','850','900','950']}
 ```
 
+## Create table with key range: 00 -> 99
+```
+create 'tbl_name', 'cf', {SPLITS => ['10', '20', '30', '40', '50', '60', '70', '80', '90']}
+```
 
-- Table with TTL: ttl is in second
+
+## Table with TTL: ttl is in second
 ```
 alter 'hbase_tbl_dev', { NAME => 'cf', COMPRESSION => 'SNAPPY', TTL => '2592000'}
 ```
