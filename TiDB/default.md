@@ -1,0 +1,1 @@
+- TiDB Dasbboard port 2379 ( using password on bootstrap/init with root user to login)

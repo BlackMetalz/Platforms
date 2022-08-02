@@ -1,4 +1,6 @@
-# Bootstrap simple cluster in single machine. Ref: https://docs.pingcap.com/tidb/stable/quick-start-with-tidb
+### Complete document: https://docs.pingcap.com/tidb/
+
+### Bootstrap simple cluster in single machine. Ref: https://docs.pingcap.com/tidb/stable/quick-start-with-tidb
 
 
 
