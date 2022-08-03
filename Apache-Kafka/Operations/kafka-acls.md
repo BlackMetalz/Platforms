@@ -1,6 +1,6 @@
-## Source: https://docs.confluent.io/platform/current/kafka/authorization.html
+### Source: https://docs.confluent.io/platform/current/kafka/authorization.html
 
-## - Show list permission: 
+#### - Show list permission: 
 ```
 bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.54:2181 --list
 ```
@@ -28,13 +28,13 @@ Current ACLs for resource `ResourcePattern(resourceType=GROUP, name=*, patternTy
 
 User in host 10.3.48.54 / 10.3.48.56 / 10.3.48.82 has full permission
 
-## Command grant all permission for specific host
+#### Command grant all permission for specific host
 ```
 kafka-acls --authorizer-properties zookeeper.connect=10.3.48.54:2181,10.3.48.56:2181,10.3.48.82:2181 --operation All --allow-principal User:*   --allow-host 10.1.2.123  --cluster --topic '*' --group '*' --add
 
 ```
 
-## - Add: Allow user test1 have all access to group/topic with prefix `test_`
+#### - Add: Allow user test1 have all access to group/topic with prefix `test_`
 ```
 bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.54:2181,10.3.48.56:2181,10.3.48.82:2181 --add --allow-principal User:test1 --allow-host '*' --operation ALL --topic 'test_' --group 'test_' --resource-pattern-type prefixed
 ```
@@ -79,7 +79,7 @@ If you want sync resouceType=CLUSTER or GROUP. You have to enable them as well x
 
 
 
-## - Remove
+#### - Remove
 Current i have following ACLs
 ```
 Current ACLs for resource `ResourcePattern(resourceType=GROUP, name=test_, patternType=PREFIXED)`:
