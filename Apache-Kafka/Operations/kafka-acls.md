@@ -1,6 +1,6 @@
 ### Source: https://docs.confluent.io/platform/current/kafka/authorization.html
 
-#### - Show list permission: 
+#### - Show list permission of all user: 
 ```
 bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.3.48.54:2181 --list
 ```
