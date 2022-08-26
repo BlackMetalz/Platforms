@@ -14,7 +14,7 @@ That's All.
 
 for the Cmake Step, include following thing into cmake command to define custom openssl lib / header
 ```
--DOPENSSL_INCLUDE_DIR=/data/wow-libs/openssl-1_1_1f/include -DOPENSSL_LIBRARIES=/data/wow-libs/openssl-1_1_1f/lib/ -DOPENSSL_ROOT_DIR=data/wow-libs/openssl-1_1_1f/
+-DOPENSSL_INCLUDE_DIR=/data/wow-libs/openssl-1_1_1f/include/ -DOPENSSL_LIBRARIES=/data/wow-libs/openssl-1_1_1f/lib/ -DOPENSSL_ROOT_DIR=/data/wow-libs/openssl-1_1_1f/ -DOPENSSL_USE_STATIC_LIBS=True
 ```
 
 Have fun!
