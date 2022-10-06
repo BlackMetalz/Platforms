@@ -57,6 +57,24 @@ POST _reindex?wait_for_completion=false
 }
 ```
 
+-- Timeout?. Ref: https://github.com/elastic/elasticsearch/commit/d249529c82ee9a2815126f4f45d35a601e093d2a
+POST _reindex?wait_for_completion=false
+{
+  "source": {
+    "remote": {
+      "host": "http://10.0.0.222:9200",
+      "socket_timeout": "1m",
+      "connect_timeout": "60s"
+    },
+    "index": "index-name-2021.01.20"
+  },
+  "dest": {
+    "index": "index-name-2021.01.20"
+  }
+}
+```
+
+
 
 ```
 POST _reindex?wait_for_completion=false
