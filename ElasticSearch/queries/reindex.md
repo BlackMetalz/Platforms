@@ -58,6 +58,7 @@ POST _reindex?wait_for_completion=false
 ```
 
 -- Timeout?. Ref: https://github.com/elastic/elasticsearch/commit/d249529c82ee9a2815126f4f45d35a601e093d2a
+```
 POST _reindex?wait_for_completion=false
 {
   "source": {
