@@ -42,3 +42,11 @@ delete_all_snapshot 'table-pattern.*'
 ```
 clone_snapshot 'asshole_table_name_snapshot-20221010','new_namespace:new_table_name'
 ```
+
+- In case of this error:
+```
+Caused by: org.apache.hadoop.security.AccessControlException: Permission denied: user=hbase, access=WRITE, inode="/hbase/.hbase-snapshot/.tmp":hadoop:hadoop:drwxr-xr-x
+```
+Workaround:
+export HADOOP_USER_NAME=hadoop
+
