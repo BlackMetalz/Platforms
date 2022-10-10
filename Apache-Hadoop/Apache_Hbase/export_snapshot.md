@@ -37,3 +37,8 @@ delete_snapshot 'snapshotName'
 ```
 delete_all_snapshot 'table-pattern.*'
 ```
+
+- Clone snapshot: restore snapshot to specific namespace and new table name
+```
+clone_snapshot 'asshole_table_name_snapshot-20221010','new_namespace:new_table_name'
+```
