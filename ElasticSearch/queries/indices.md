@@ -13,3 +13,13 @@ PUT some_index
 }
 ```
 
+-- change replica:
+```
+PUT /my-index-000001/_settings
+{
+  "index" : {
+    "number_of_replicas" : 2
+  }
+}
+
+```
