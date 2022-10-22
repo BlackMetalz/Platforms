@@ -19,3 +19,12 @@ hbase> drop 't1'
 hbase> drop 'ns1:t1'
 
 ```
+
+
+# For alter table with replicated cluster by @hoangdh:
+```
+- Disable replicate table
+- Alter table on both cluster
+- Enable replicate table
+- Run major compaction this table
+```
