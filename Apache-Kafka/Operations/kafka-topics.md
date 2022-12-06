@@ -1,4 +1,4 @@
-- Creating a Kafka Topic − Kafka provides a command line utility named kafka-topics.sh to create topics on the server. 
+### Creating a Kafka Topic − Kafka provides a command line utility named kafka-topics.sh to create topics on the server. 
 Note: Don't use `.` ( dot ) or `_` ( underscore ) for topic names
 Open new terminal and type the below example.
 ```
@@ -15,7 +15,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 2  
 ```
 
 
-- Delete topic:
+### Delete topic:
 ```
 ./bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic-name
 ```
@@ -25,7 +25,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 2  
 ./bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic 'topic_name-.*'
 ```
 
-- List kafka topics:
+### List kafka topics:
 ```
 bin/kafka-topics.sh --list --zookeeper localhost:2181
 ```
@@ -53,7 +53,7 @@ a randomly selected portion of the partitions.
 In our case, we see that our first broker (with broker.id 0) is the leader. Then Replicas:0,2,1 means that all the brokers replicate the 
 topic finally Isr is the set of in-sync replicas. Well, this is the subset of replicas that are currently alive and caught up by the leader.
 
-- Miscellaneous
+### Miscellaneous
 Find all the partitions where one or more of the replicas for the partition are not in-sync with the leader.
 ```
 $KAFKA_HOME/bin/kafka-topics.sh --zookeeper localhost:2181 --describe --under-replicated-partitions
