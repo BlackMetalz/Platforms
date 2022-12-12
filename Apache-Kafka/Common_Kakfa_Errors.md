@@ -1,3 +1,10 @@
+- Under-replicated partition or kafka server log spam this:
+```
+WARN [ReplicaFetcher replicaId=9, leaderId=3, fetcherId=0] Error in response for fetch request
+```
+Solution: Restart
+Reason: Stuck network or disk io thread, have to restart for release them!
+
 - GroupAuthorizationFailedError:
 ```
 Have to create group with prefix pattern already grant in kafka auth :D
